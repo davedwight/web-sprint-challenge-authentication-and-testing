@@ -21,7 +21,9 @@ afterAll(async () => {
 describe("[GET] /api/jokes", () => {
   test("requests with a valid token get all jokes from the jokes table", async () => {
     // make sure to check token validation
-    const res = await request(server).get("/api/jokes");
+    await request(server).post('/api/auth/register').send({ username: 'fizzbuzz', password: '1234' })
+    let res = await request(server).post('/api/auth/login').send({ username: 'fizzbuzz', password: '1234' })
+    res = await request(server).get('/api/jokes').set('Authorization', res.body.token)
     expect(res.body).toMatchObject([
       {
         id: "0189hNRf2g",
