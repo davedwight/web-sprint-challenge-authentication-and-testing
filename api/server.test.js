@@ -39,11 +39,9 @@ describe("[GET] /api/jokes", () => {
       },
     ]);
   });
-  test("requests without a token are bounced with status 401", () => {});
-  test("requests with an invalid token are bounced with status 401", () => {});
-  test("snapshot test", async () => {
-    const res = await request(server).get("/api/jokes");
-    expect(res.body).toMatchSnapshot();
+  test("requests without a token are bounced with proper message", async () => {
+    const res = await request(server).get('/api/jokes').set('Authorization', 'foobar')
+    expect(res.body.message).toMatch(/token invalid/i)
   });
 });
 
