@@ -37,5 +37,9 @@ describe("jokes router", () => {
         },
       ]);
     });
+    test("snapshot test", async () => {
+      const res = await request(server).get("/api/jokes");
+      expect(res.body).toMatchSnapshot();
+    });
   });
 });
