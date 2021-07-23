@@ -27,7 +27,7 @@ Users must be able to call the `[POST] /api/auth/register` endpoint to create a 
 We also need to make sure nobody without the token can call `[GET] /api/jokes` and gain access to our dad jokes.
 
 We will hash the user's password using `bcryptjs`, and use JSON Web Tokens and the `jsonwebtoken` library.
-
+ 
 ### MVP
 
 Your finished project must include all of the following requirements (further instructions are found inside each file):
