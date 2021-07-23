@@ -46,7 +46,12 @@ describe("[GET] /api/jokes", () => {
 });
 
 describe("[POST] /api/auth/register", () => {
-  test("registers a new user in the database", () => {});
+  test("registers a new user in the database", async () => {
+    const res = await request(server).post('/api/auth/register').send({ username: 'fizzbuzz', password: '1234' })
+    // expect(res.body).toMatchObject([
+
+    // ])
+  });
   test("register returns the new user information", () => {});
   test("does not create new user in the database if username and password are not provided", () => {});
   test("does not create new user if username is a duplicate", () => {});
