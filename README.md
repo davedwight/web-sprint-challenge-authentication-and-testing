@@ -62,6 +62,19 @@ Your finished project must include all of the following requirements (further in
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
+
+    For sessions, the server creates a session id when a user logs in. The server stores the session id in a cookie and sends the cookie to the user's browser. On subsequent requests, the cookie is sent with the request. The server compares the session id in the cookie to the session id stored in memory and, if the session id matches a current open session, the server sends back a response. Authenticating with sessions is less scalable because the session information is stored in server memory. This can become a problem when there are many users simultaneously sending requests to the server. Cookies are best when requesting resources from a single origin and are not advised when authenticating users on mobile devices or other devices.
+
+    For JSON Web Tokens, the server creates a JWT (encoded from the header, payload, and signature) when a user logs in. The server sends the token to the client, which stores the token (usually in local storage). On subsequent requests, the token is sent in the request headers. The server decodes the token signature and validates the token by comparing the signature. The biggest difference from sessions is that the user's state is stored on the client side (in a token) rather than on the server side (in a session). This makes JWT better fits for mobile device authentication and scalability.
+
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
+
+    bcryptjs hashes passwords before they are stored in a database, which means that even if the database is stolen, password information would be secure. bcrypt allows for iterative hashing, meaning a password is hashed many times (ie 2 ^ 8) times. This makes passwords even more resistant to brute force attacks as it significantly increases computation time. Additionally, it adds a salt to each hash, which is a random string that makes each resulting hash unique, even for the same password.
+
 3. How are unit tests different from integration and end-to-end testing?
+
+    Unit tests single units of an application such as the result of a single function in an application. Integration tests if individual units or modules are working as expected _with_ other units or bits of code. Integration tests also test how external systems work with internal modules. End-to-end tests test the entire user experience from start to finish.
+
 4. How does _Test Driven Development_ change the way we write applications and tests?
+
+    With TDD, you write tests before you write the corresponding application code. Specifically, you write the tests, which will initially fail. You then write the corresponding application code and get the test to pass, which gives you confidence that your application is working as expected. You then refactor code and continue to test. This way, the test can alert you when your changes break your application.
